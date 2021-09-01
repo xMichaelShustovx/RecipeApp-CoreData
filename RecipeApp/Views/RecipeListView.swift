@@ -11,37 +11,48 @@ struct RecipeListView: View {
     
     @Environment(\.managedObjectContext) private var viewContext
     
-    @EnvironmentObject var model:RecipeModel
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)])
+    private var recipes: FetchedResults<Recipe>
     
-    private var title: String {
+    @State var filterBy = ""
+    
+    private var filteredRecipes: [Recipe] {
         
-        if model.selectedCategory == nil || model.selectedCategory == Constants.defaultListFilter {
-            return "All Recipes"
+        if filterBy.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+            return Array(recipes)
         }
         else {
-            return model.selectedCategory!
+            
+            return recipes.filter { r in
+                
+                return r.name.contains(filterBy)
+//                if r.name.contains(filterBy) {
+//                    return true
+//                }
+//                return false
+            }
         }
     }
-    
+        
     var body: some View {
         
         NavigationView {
             
             VStack (alignment: .leading) {
                 
-                Text(title)
+                Text("All recipes")
                     .padding(.top, 40)
                     .font(Font.custom("Avenir Heavy", size: 28))
+                
+                SearchBarView(filterBy: $filterBy)
+                    .padding([.trailing, .bottom])
+                
                 
                 ScrollView {
                     
                     LazyVStack (alignment: .leading) {
                         
-                        ForEach(model.recipes) { r in
-                            
-                            if model.selectedCategory == nil ||
-                                model.selectedCategory == Constants.defaultListFilter ||
-                                model.selectedCategory != nil && r.category == model.selectedCategory {
+                        ForEach(filteredRecipes) { r in
                                 
                                 NavigationLink(
                                     destination: RecipeDetailView(recipe:r),
@@ -65,13 +76,16 @@ struct RecipeListView: View {
                                             }
                                         }
                                     })
-                            }
                         }
                     }
                 }
             }
             .navigationBarHidden(true)
             .padding(.leading)
+            .onTapGesture {
+                // Resign first responder
+                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+            }
         }
     }
 }

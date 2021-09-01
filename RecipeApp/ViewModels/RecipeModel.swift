@@ -14,8 +14,6 @@ class RecipeModel: ObservableObject {
     let managedObjectContext = PersistenceController.shared.container.viewContext
     
     @Published var recipes = [Recipe]()
-    @Published var categories = Set<String>()
-    @Published var selectedCategory: String?
     
     init() {
 

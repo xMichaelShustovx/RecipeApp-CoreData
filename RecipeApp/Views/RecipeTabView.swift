@@ -24,15 +24,6 @@ struct RecipeTabView: View {
                 }
                 .tag(Constants.featuredTab)
             
-            RecipeCategoryView(selectedTab: $selectedTab)
-                .tabItem {
-                    VStack {
-                        Image(systemName: "square.grid.2x2")
-                        Text("Categories")
-                    }
-                }
-                .tag(Constants.categoriesTab)
-            
             RecipeListView()
                 .tabItem {
                     VStack {
