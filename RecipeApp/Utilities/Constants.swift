@@ -10,8 +10,8 @@ import Foundation
 struct Constants {
     
     static var featuredTab = 0
-    static var categoriesTab = 1
-    static var listTab = 2
+    static var listTab = 1
+    static var addTab = 2
     
     static var defaultListFilter = "All Recipes"
     
