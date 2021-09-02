@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AddRecipeView: View {
     
+    // Properties for recipe meta data
     @State private var name = ""
     @State private var summary = ""
     @State private var prepTime = ""
@@ -16,8 +17,12 @@ struct AddRecipeView: View {
     @State private var totalTime = ""
     @State private var servings = ""
     
+    // List type recipe meta data
     @State private var highlights = [String]()
     @State private var directions = [String]()
+    
+    // Ingredient data
+    @State private var ingredients = [IngredientJSON]()
     
     var body: some View {
     
@@ -26,9 +31,7 @@ struct AddRecipeView: View {
             HStack {
                 
                 Button(action: {
-                    
-                    
-                    
+                    clear()
                 }, label: {
                     Text("Clear")
                 })
@@ -37,10 +40,14 @@ struct AddRecipeView: View {
                 
                 Button(action: {
                     
+                    // Add recipe to core data
+                    addRecipe()
                     
+                    // Clear the form after adding recipe
+                    clear()
                     
                 }, label: {
-                    Text("Save")
+                    Text("Add")
                 })
             }
             
@@ -59,10 +66,32 @@ struct AddRecipeView: View {
                     
                     AddListData(list: $directions, title: "Directions", placeholderText: "Add some french juice")
                     
+                    AddIngredientData(ingredients: $ingredients)
+                    
                 }
             }
         }
         .padding(.horizontal)
+    }
+    
+    func clear() {
+        
+        name = ""
+        summary = ""
+        prepTime = ""
+        cookTime = ""
+        totalTime = ""
+        servings = ""
+        
+        highlights = [String]()
+        directions = [String]()
+        
+        ingredients = [IngredientJSON]()
+        
+    }
+    
+    func addRecipe() {
+        
     }
 }
 

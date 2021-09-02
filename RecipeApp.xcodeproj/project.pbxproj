@@ -31,6 +31,7 @@
 		52E9913226E1439D00753EED /* AddRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E9913126E1439D00753EED /* AddRecipeView.swift */; };
 		52E9913826E14A2200753EED /* AddMetaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E9913726E14A2200753EED /* AddMetaData.swift */; };
 		52E9913A26E14B8E00753EED /* AddListData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E9913926E14B8E00753EED /* AddListData.swift */; };
+		52E9913C26E1542700753EED /* AddIngredientData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E9913B26E1542700753EED /* AddIngredientData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		52E9913126E1439D00753EED /* AddRecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeView.swift; sourceTree = "<group>"; };
 		52E9913726E14A2200753EED /* AddMetaData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMetaData.swift; sourceTree = "<group>"; };
 		52E9913926E14B8E00753EED /* AddListData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddListData.swift; sourceTree = "<group>"; };
+		52E9913B26E1542700753EED /* AddIngredientData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIngredientData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +181,7 @@
 				52E9913126E1439D00753EED /* AddRecipeView.swift */,
 				52E9913726E14A2200753EED /* AddMetaData.swift */,
 				52E9913926E14B8E00753EED /* AddListData.swift */,
+				52E9913B26E1542700753EED /* AddIngredientData.swift */,
 			);
 			path = "Add Recipe";
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 				5217AD4526D8158B004339E2 /* RecipeDataModel.xcdatamodeld in Sources */,
 				5276C95826BFCE7600299991 /* Rational.swift in Sources */,
 				5217AD7326D82043004339E2 /* Persistence.swift in Sources */,
+				52E9913C26E1542700753EED /* AddIngredientData.swift in Sources */,
 				52E9913226E1439D00753EED /* AddRecipeView.swift in Sources */,
 				52DA6A8826E0028E00D5781F /* SearchBarView.swift in Sources */,
 				5217AD5126D81F5C004339E2 /* Ingredient+CoreDataProperties.swift in Sources */,
