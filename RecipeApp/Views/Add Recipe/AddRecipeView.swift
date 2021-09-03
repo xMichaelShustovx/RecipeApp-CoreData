@@ -24,6 +24,14 @@ struct AddRecipeView: View {
     // Ingredient data
     @State private var ingredients = [IngredientJSON]()
     
+    // Recipe Image
+    @State private var recipeImage: UIImage?
+    
+    // Image Picker
+    @State private var isShowingImagePicker = false
+    @State private var selectedImageSource = UIImagePickerController.SourceType.photoLibrary
+    @State private var placeholderImage = Image("noimage")
+    
     var body: some View {
     
         VStack {
@@ -55,6 +63,30 @@ struct AddRecipeView: View {
                 
                 VStack {
                     
+                    // Recipe image
+                    placeholderImage
+                        .resizable()
+                        .scaledToFit()
+                    
+                    HStack {
+                        
+                        Button("Photo lybrary") {
+                            selectedImageSource = .photoLibrary
+                            isShowingImagePicker = true
+                        }
+                        
+                        Text(" | ")
+                        
+                        Button("Camera") {
+                            selectedImageSource = .camera
+                            isShowingImagePicker = true
+                        }
+                    }
+                    .sheet(isPresented: $isShowingImagePicker, onDismiss: loadImage) {
+                        ImagePicker(selectedSource: selectedImageSource, recipeImage: $recipeImage)
+                    }
+                    
+                    // Recipe meta data
                     AddMetaData(name: $name,
                                 summary: $summary,
                                 prepTime: $prepTime,
@@ -62,16 +94,24 @@ struct AddRecipeView: View {
                                 totalTime: $totalTime,
                                 servings: $servings)
                     
+                    // List data
                     AddListData(list: $highlights, title: "Highlights", placeholderText: "Vegetarian")
                     
                     AddListData(list: $directions, title: "Directions", placeholderText: "Add some french juice")
                     
+                    // Ingredient data
                     AddIngredientData(ingredients: $ingredients)
                     
                 }
             }
         }
         .padding(.horizontal)
+    }
+    
+    func loadImage() {
+        if recipeImage != nil {
+            placeholderImage = Image(uiImage: recipeImage!)
+        }
     }
     
     func clear() {
