@@ -18,7 +18,7 @@ extension Recipe {
 
     @NSManaged public var id: UUID?
     @NSManaged public var name: String
-    @NSManaged public var category: String
+    @NSManaged public var category: String?
     @NSManaged public var featured: Bool
     @NSManaged public var image: Data?
     @NSManaged public var summary: String

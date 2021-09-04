@@ -9,7 +9,7 @@
         <relationship name="recipe" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Recipe" inverseName="ingredients" inverseEntity="Recipe"/>
     </entity>
     <entity name="Recipe" representedClassName="Recipe" syncable="YES">
-        <attribute name="category" attributeType="String"/>
+        <attribute name="category" optional="YES" attributeType="String"/>
         <attribute name="cookTime" attributeType="String"/>
         <attribute name="directions" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
         <attribute name="featured" attributeType="Boolean" usesScalarValueType="YES"/>

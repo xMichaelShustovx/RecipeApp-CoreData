@@ -9,6 +9,10 @@ import SwiftUI
 
 struct AddRecipeView: View {
     
+    @Environment(\.managedObjectContext) private var viewContext
+    
+    @Binding var selectedTab: Int
+    
     // Properties for recipe meta data
     @State private var name = ""
     @State private var summary = ""
@@ -53,6 +57,9 @@ struct AddRecipeView: View {
                     
                     // Clear the form after adding recipe
                     clear()
+                    
+                    // Switch to list view
+                    selectedTab = Constants.listTab
                     
                 }, label: {
                     Text("Add")
@@ -128,15 +135,47 @@ struct AddRecipeView: View {
         
         ingredients = [IngredientJSON]()
         
+        placeholderImage = Image("noimage")
+        
     }
     
     func addRecipe() {
         
-    }
-}
-
-struct AddRecipeView_Previews: PreviewProvider {
-    static var previews: some View {
-        AddRecipeView()
+        let recipe = Recipe(context: viewContext)
+        
+        recipe.id = UUID()
+        recipe.name = name
+        recipe.featured = false
+        recipe.summary = summary
+        recipe.prepTime = prepTime
+        recipe.cookTime = cookTime
+        recipe.totalTime = totalTime
+        recipe.servings = Int(servings) ?? 1
+        recipe.highlights = highlights
+        recipe.directions = directions
+        recipe.image = recipeImage?.pngData() ?? Data()
+        
+        for i in ingredients {
+            
+            let ingredient = Ingredient(context: viewContext)
+            
+            ingredient.id = UUID()
+            ingredient.name = i.name
+            ingredient.num = i.num ?? 1
+            ingredient.denom = i.denom ?? 1
+            ingredient.unit = i.unit
+            
+            ingredient.recipe = recipe
+            //recipe.addToIngredients(ingredient)
+            
+        }
+        
+        // Save to core data
+        do {
+            try viewContext.save()
+        }
+        catch {
+            print(error)
+        }
     }
 }

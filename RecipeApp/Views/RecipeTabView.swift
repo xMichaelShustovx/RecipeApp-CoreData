@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RecipeTabView: View {
     
-    @State var selectedTab = Constants.featuredTab
+    @State private var selectedTab = Constants.featuredTab
     
     var body: some View {
         
@@ -33,7 +33,7 @@ struct RecipeTabView: View {
                 }
                 .tag(Constants.listTab)
             
-            AddRecipeView()
+            AddRecipeView(selectedTab: $selectedTab)
                 .tabItem {
                     VStack {
                         Image(systemName: "plus.circle")
